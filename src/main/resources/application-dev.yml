@@ -1,0 +1,33 @@
+server:
+  port: 8089
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://39.98.153.96:5432/gisim
+    username: zhangyue
+    password: zy198662
+
+#  # 解决jpa未被使用启动报错：org.postgresql.jdbc.PgConnection.createClob() 方法尚未被实作
+#  jpa:
+#    properties:
+#      hibernate:
+#        temp.use_jdbc_metadata_defaults: false
+#        dialect: org.hibernate.dialect.PostgreSQLDialect
+#        hbm2ddl:
+#          auto: update
+#        format_sql: true
+#    show-sql: true
+
+mybatis:
+  mapper-locations: classpath:mapping/*Mapping.xml
+  type-aliases-package: com.zy.gisim.model
+  configuration:
+    classpath: mybatis.xml
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+logging:
+  level:
+    com.zy.gisim.services: debug
+
+swagger:
+  markdowns: classpath:markdown/*
