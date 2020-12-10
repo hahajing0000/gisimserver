@@ -18,7 +18,7 @@ public interface UserMapper {
      * @param entity
      * @return
      */
-    boolean login(ReqReqisterUserEntity entity);
+    UserEntity login(ReqReqisterUserEntity entity);
 
     /**
      * 获取用户信息
@@ -53,10 +53,10 @@ public interface UserMapper {
 
     /**
      * 修改用户位置
-     * @param id 用户id
-     * @param lat 纬度
-     * @param lon 经度
+     * @param id
+     * @param lon
+     * @param lat
      * @return
      */
-    boolean uploadLocation(int id,double lat,double lon);
+    boolean uploadLocation(int id,double lon,double lat);
 }

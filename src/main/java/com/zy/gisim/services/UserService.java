@@ -1,6 +1,7 @@
 package com.zy.gisim.services;
 
 import com.zy.gisim.domain.ReqReqisterUserEntity;
+import com.zy.gisim.model.ResponseEntity;
 import com.zy.gisim.model.UserEntity;
 
 public interface UserService {
@@ -9,21 +10,21 @@ public interface UserService {
      * @param entity
      * @return
      */
-    boolean register(ReqReqisterUserEntity entity);
+    ResponseEntity<Boolean> register(ReqReqisterUserEntity entity);
 
     /**
      * 用户登录
      * @param entity
      * @return
      */
-    boolean login(ReqReqisterUserEntity entity);
+    ResponseEntity<UserEntity> login(ReqReqisterUserEntity entity);
 
     /**
      * 获取用户信息
      * @param id
      * @return
      */
-    UserEntity getUserById(int id);
+    ResponseEntity<UserEntity> getUserById(int id);
 
     /**
      * 修改密码
@@ -31,7 +32,7 @@ public interface UserService {
      * @param pwd 修改的密码
      * @return
      */
-    boolean modifyPwd(int id,String pwd);
+    ResponseEntity<Boolean> modifyPwd(int id,String pwd);
 
     /**
      * 修改用户信息
@@ -39,7 +40,7 @@ public interface UserService {
      * @param id 用户id
      * @return
      */
-    boolean modifyNick(int id,String nick);
+    ResponseEntity<Boolean> modifyNick(int id,String nick);
 
     /**
      * 修改头像
@@ -47,7 +48,7 @@ public interface UserService {
      * @param headimg 头像
      * @return
      */
-    boolean modifyHeadimg(int id,String headimg);
+    ResponseEntity<Boolean> modifyHeadimg(int id,String headimg);
 
     /**
      * 修改用户位置
@@ -56,5 +57,5 @@ public interface UserService {
      * @param lon 经度
      * @return
      */
-    boolean uploadLocation(int id,double lat,double lon);
+    ResponseEntity<Boolean> uploadLocation(int id,double lon,double lat);
 }

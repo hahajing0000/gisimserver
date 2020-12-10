@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zy.gisim.mapper.UserMapper">
 
-    <resultMap id="BaseResultMap" type="com.zy.gisim.model.UserInfo">
+    <resultMap id="BaseResultMap" type="com.zy.gisim.model.UserEntity">
     </resultMap>
     <resultMap id="ReqRegisterMap" type="com.zy.gisim.domain.ReqReqisterUserEntity">
     </resultMap>
@@ -39,7 +39,7 @@
 
     <!--上传位置信息-->
     <update id="uploadLocation">
-        update s_user set lastlocation=(#{lon},#{lat}) where id=#{id}
+        update s_user set lastlocation=point(#{lon},#{lat}) where id=#{id}
     </update>
 
 </mapper>
