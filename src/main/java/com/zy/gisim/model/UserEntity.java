@@ -19,5 +19,7 @@ public class UserEntity {
     private String nick;
     @ApiModelProperty(name = "headimg", value = "头像地址", notes = "头像地址", dataType = "String")
     private String headimg;
+    @ApiModelProperty(name = "imaccount", value = "IM系统关联账户", notes = "IM系统关联账户", dataType = "String")
+    private String imaccount;
 
 }

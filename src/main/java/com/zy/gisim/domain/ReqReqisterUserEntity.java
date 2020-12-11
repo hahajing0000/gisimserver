@@ -15,4 +15,6 @@ public class ReqReqisterUserEntity {
     private String phonenumber;
     @ApiModelProperty(name = "pwd", value = "登录密码", notes = "登录密码", dataType = "String")
     private String pwd;
+    @ApiModelProperty(name = "imaccount", value = "IM系统关联账户    登录接口——无需传递该字段", notes = "IM系统关联账户 登录接口——无需传递该字段", dataType = "String")
+    private String imaccount;
 }
