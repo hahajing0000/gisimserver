@@ -58,4 +58,11 @@ public interface UserService {
      * @return
      */
     ResponseEntity<Boolean> uploadLocation(int id,double lon,double lat);
+
+    /**
+     * 获取验证码
+     * @param phoneNumber 手机号码
+     * @return
+     */
+    ResponseEntity<String> verificationCode(String phoneNumber);
 }

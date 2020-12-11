@@ -8,8 +8,11 @@ import com.zy.gisim.services.UserService;
 import com.zy.gisim.utils.ResponseUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
-@Service
+import java.util.Random;
+
+@Service("UserService")
 public class UserServiceImpl implements UserService {
     @Autowired
     UserMapper mapper;
@@ -76,5 +79,14 @@ public class UserServiceImpl implements UserService {
             return ResponseUtils.success(true);
         }
         return ResponseUtils.failed("上传位置信息");
+    }
+
+    @Override
+    public ResponseEntity<String> verificationCode(String phoneNumber) {
+        if (StringUtils.isEmpty(phoneNumber)){
+            return ResponseUtils.failed("请传入手机号码");
+        }
+        int result= (int) ((Math.random()*9+1)*100000);
+        return ResponseUtils.success(String.valueOf(result));
     }
 }

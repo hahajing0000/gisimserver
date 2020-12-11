@@ -28,6 +28,6 @@ mybatis:
 logging:
   level:
     com.zy.gisim.services: debug
-
+    io.swagger.models.parameters.AbstractSerializableParameter: error
 swagger:
   markdowns: classpath:markdown/*

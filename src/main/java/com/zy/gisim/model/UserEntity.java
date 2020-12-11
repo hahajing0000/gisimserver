@@ -21,5 +21,7 @@ public class UserEntity {
     private String headimg;
     @ApiModelProperty(name = "imaccount", value = "IM系统关联账户", notes = "IM系统关联账户", dataType = "String")
     private String imaccount;
+    @ApiModelProperty(name = "token", value = "token", notes = "token", dataType = "String")
+    private String token;
 
 }

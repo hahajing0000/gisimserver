@@ -50,13 +50,13 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
         }
 
         if (method.isAnnotationPresent(UserToken.class)) {
-            //校验Header
-            boolean verifyResult= verifyHeader(httpServletRequest);
-            if (!verifyResult){
-                httpServletResponse.setStatus(1001);
-                setRespData(httpServletResponse, new Gson().toJson(ResponseUtils.failed("请求头信息不完整")));
-                return false;
-            }
+//            //校验Header
+//            boolean verifyResult= verifyHeader(httpServletRequest);
+//            if (!verifyResult){
+//                httpServletResponse.setStatus(1001);
+//                setRespData(httpServletResponse, new Gson().toJson(ResponseUtils.failed("请求头信息不完整")));
+//                return false;
+//            }
             UserToken userToken = method.getAnnotation(UserToken.class);
             if (userToken.required()) {
                 if (StringUtils.isEmpty(usertk)) {
@@ -82,12 +82,12 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
 //                        return false;
 //                    }
 //                    String un = userInfoResponseEntity.getData().getPhonenumber();
-//                    JWTVerifier jwtVerifier = JWT.require(Algorithm.HMAC256(un)).build();
-//                    try {
-//                        jwtVerifier.verify(usertk);
-//                    } catch (JWTVerificationException e) {
-//                        httpServletResponse.setStatus(40103);
-//                    }
+                    JWTVerifier jwtVerifier = JWT.require(Algorithm.HMAC256(phonenumbser)).build();
+                    try {
+                        jwtVerifier.verify(usertk);
+                    } catch (JWTVerificationException e) {
+                        httpServletResponse.setStatus(40103);
+                    }
                     return true;
                 } else {
                     httpServletResponse.setStatus(40101);
