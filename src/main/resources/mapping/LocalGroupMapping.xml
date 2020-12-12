@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zy.gisim.mapper.LocalGroupMapper">
+
+    <resultMap id="BaseResultMap" type="com.zy.gisim.model.LocalGroupEntity">
+    </resultMap>
+
+    <insert id="createLocalGroup">
+        insert b_localgroup(groupname,membercount,groupdesc,userid,ctime) values(#{groupname},0,#{groupdesc},#{userid},CURRENT_TIMESTAMP)
+    </insert>
+
+    <delete id="deleteLocalGroup">
+        delete from b_localgroup where id=#{groupid}
+    </delete>
+
+    <update id="modifyLocalGroup">
+        update b_localgroup set groupname=#{groupname},groupdesc=#{groupdesc} where id=#{id}
+    </update>
+
+    <select id="findByUserId" resultMap="BaseResultMap">
+        select * from b_localgroup where userid=#{userid}
+    </select>
+
+    <select id="findById">
+        select * from b_localgroup where id=#{groupid}
+    </select>
+
+    <update id="modifyMemberCount">
+        update b_localgroup set membercount=membercount+#{relativeCount} where id=#{groupid}
+    </update>
+
+</mapper>
