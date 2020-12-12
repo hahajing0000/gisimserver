@@ -23,5 +23,8 @@ public class UserEntity {
     private String imaccount;
     @ApiModelProperty(name = "token", value = "token", notes = "token", dataType = "String")
     private String token;
-
+    @ApiModelProperty(name = "lon", value = "经度", notes = "经度", dataType = "String")
+    private String lon;
+    @ApiModelProperty(name = "lat", value = "纬度", notes = "纬度", dataType = "String")
+    private String lat;
 }

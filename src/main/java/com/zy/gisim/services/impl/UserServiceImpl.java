@@ -20,6 +20,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ResponseEntity<Boolean> register(ReqReqisterUserEntity entity) {
+        if(mapper.existsUser(entity.getPhonenumber())>0){
+            return ResponseUtils.failed("该用户已经注册过，请使用其他手机号");
+        }
         boolean result = mapper.register(entity);
         if (result){
             return ResponseUtils.success(result);
@@ -29,6 +32,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ResponseEntity<UserEntity> login(ReqReqisterUserEntity entity) {
+
         UserEntity result = mapper.login(entity);
         if (result==null){
             return ResponseUtils.failed("用户名或者密码不正确");

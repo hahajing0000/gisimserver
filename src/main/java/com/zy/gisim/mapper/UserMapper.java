@@ -21,6 +21,13 @@ public interface UserMapper {
     UserEntity login(ReqReqisterUserEntity entity);
 
     /**
+     * 判断用户是否存在
+     * @param phonenumber 电话号码
+     * @return
+     */
+    int existsUser(String phonenumber);
+
+    /**
      * 获取用户信息
      * @param id
      * @return

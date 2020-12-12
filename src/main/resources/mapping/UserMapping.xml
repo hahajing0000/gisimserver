@@ -12,14 +12,19 @@
         insert into s_user(phonenumber,pwd) values(#{phonenumber},#{pwd})
     </insert>
 
+    <!--判断用户是否已存在-->
+    <select id="existsUser" resultType="Integer">
+        select count(*) from s_user where phonenumber=#{phonenumber}
+    </select>
+
     <!--登录-->
     <select id="login" resultMap="BaseResultMap">
-        select * from s_user where phonenumber=#{phonenumber} and pwd=#{pwd}
+        select *,lastlocation[0] as lon,lastlocation[1] as lat from s_user where phonenumber=#{phonenumber} and pwd=#{pwd}
     </select>
 
     <!--根据id获取用户信息-->
     <select id="getUserById" resultMap="BaseResultMap">
-        select * from s_user where id=#{id}
+        select *,lastlocation[0] as lon,lastlocation[1] as lat from s_user where id=#{id}
     </select>
 
     <!--修改密码-->
