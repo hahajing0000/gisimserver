@@ -6,7 +6,7 @@
     </resultMap>
 
     <insert id="createLocalGroup">
-        insert b_localgroup(groupname,membercount,groupdesc,userid,ctime) values(#{groupname},0,#{groupdesc},#{userid},CURRENT_TIMESTAMP)
+        insert into b_localgroup(groupname,membercount,groupdesc,userid,ctime) values(#{groupname},0,#{groupdesc},#{userid},CURRENT_TIMESTAMP)
     </insert>
 
     <delete id="deleteLocalGroup">
@@ -21,7 +21,7 @@
         select * from b_localgroup where userid=#{userid}
     </select>
 
-    <select id="findById">
+    <select id="findById" resultMap="BaseResultMap">
         select * from b_localgroup where id=#{groupid}
     </select>
 
