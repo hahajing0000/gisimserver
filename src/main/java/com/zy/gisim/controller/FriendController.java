@@ -4,6 +4,7 @@ import com.zy.gisim.domain.ReqFriendEntity;
 import com.zy.gisim.interceptor.token.UserToken;
 import com.zy.gisim.model.FriendEntity;
 import com.zy.gisim.model.ResponseEntity;
+import com.zy.gisim.model.UserEntity;
 import com.zy.gisim.services.FriendService;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -136,5 +137,69 @@ public class FriendController {
     })
     public ResponseEntity<FriendEntity> findById(int userid,int friendid){
         return service.findById(userid,friendid);
+    }
+
+    /**
+     * 同意加好友
+     * @param userid
+     * @param friendid
+     * @return
+     */
+    @UserToken
+    @ApiOperation(value = "同意添加好友", notes = "同意添加好友", httpMethod = "PUT")
+    @PutMapping("/agree")
+    @ApiImplicitParams(value = {
+            @ApiImplicitParam(dataType = "int", name = "userid", value = "用户id", required = true),
+            @ApiImplicitParam(dataType = "int", name = "friendid", value = "好友id", required = true),
+    })
+    public ResponseEntity<Boolean> agree(int userid,int friendid){
+        return service.agree(userid,friendid);
+    }
+
+    /**
+     * 拒绝加好友
+     * @param userid
+     * @param friendid
+     * @return
+     */
+    @UserToken
+    @ApiOperation(value = "拒绝添加好友", notes = "拒绝添加好友", httpMethod = "PUT")
+    @PutMapping("/refuse")
+    @ApiImplicitParams(value = {
+            @ApiImplicitParam(dataType = "int", name = "userid", value = "用户id", required = true),
+            @ApiImplicitParam(dataType = "int", name = "friendid", value = "好友id", required = true),
+    })
+    public ResponseEntity<Boolean> refuse(int userid,int friendid){
+        return service.refuse(userid,friendid);
+    }
+
+    /**
+     * 获取所有添加好友请求
+     * @param userid
+     * @return
+     */
+    @UserToken
+    @ApiOperation(value = "获取添加好友申请", notes = "获取添加好友申请", httpMethod = "GET")
+    @GetMapping("/findReqFriends")
+    @ApiImplicitParams(value = {
+            @ApiImplicitParam(dataType = "int", name = "userid", value = "用户id", required = true)
+    })
+    public ResponseEntity<List<FriendEntity>> findReqFriends(int userid){
+        return service.findReqFriends(userid);
+    }
+
+    /**
+     * 按手机号或者昵称查找用户
+     * @param keyword
+     * @return
+     */
+    @UserToken
+    @ApiOperation(value = "根据电话号码或者昵称获取用户信息", notes = "根据电话号码或者昵称获取用户信息", httpMethod = "GET")
+    @GetMapping("/queryUser")
+    @ApiImplicitParams(value = {
+            @ApiImplicitParam(dataType = "String", name = "keyword", value = "搜索关键字", required = true)
+    })
+    public ResponseEntity<List<UserEntity>> queryUser(String keyword){
+        return service.queryUser(keyword);
     }
 }

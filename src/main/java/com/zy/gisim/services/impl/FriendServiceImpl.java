@@ -4,6 +4,7 @@ import com.zy.gisim.domain.ReqFriendEntity;
 import com.zy.gisim.mapper.FriendMapper;
 import com.zy.gisim.model.FriendEntity;
 import com.zy.gisim.model.ResponseEntity;
+import com.zy.gisim.model.UserEntity;
 import com.zy.gisim.services.FriendService;
 import com.zy.gisim.utils.ResponseUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,6 +75,42 @@ public class FriendServiceImpl implements FriendService {
     public ResponseEntity<FriendEntity> findById(int userid, int friendid) {
         FriendEntity result = mapper.findById(userid, friendid);
         if (result==null){
+            return ResponseUtils.failed("没有检索到符合条件的数据记录");
+        }
+        return ResponseUtils.success(result);
+    }
+
+    @Override
+    public ResponseEntity<Boolean> agree(int userid, int friendid) {
+        boolean result = mapper.agree(userid, friendid);
+        if (result){
+            return ResponseUtils.success(true);
+        }
+        return ResponseUtils.failed("同意添加好友失败");
+    }
+
+    @Override
+    public ResponseEntity<Boolean> refuse(int userid, int friendid) {
+        boolean result = mapper.refuse(userid, friendid);
+        if (result){
+            return ResponseUtils.success(true);
+        }
+        return ResponseUtils.failed("拒绝添加好友失败");
+    }
+
+    @Override
+    public ResponseEntity<List<FriendEntity>> findReqFriends(int userid) {
+        List<FriendEntity> result = mapper.findReqFriends(userid);
+        if (result==null||result.size()==0){
+            return ResponseUtils.failed("没有检索到符合条件的数据记录");
+        }
+        return ResponseUtils.success(result);
+    }
+
+    @Override
+    public ResponseEntity<List<UserEntity>> queryUser(String keyword) {
+        List<UserEntity> result = mapper.queryUser(keyword);
+        if (result==null||result.size()==0){
             return ResponseUtils.failed("没有检索到符合条件的数据记录");
         }
         return ResponseUtils.success(result);

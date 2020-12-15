@@ -2,6 +2,7 @@ package com.zy.gisim.mapper;
 
 import com.zy.gisim.domain.ReqFriendEntity;
 import com.zy.gisim.model.FriendEntity;
+import com.zy.gisim.model.UserEntity;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -63,4 +64,34 @@ public interface FriendMapper {
      * @return
      */
     FriendEntity findById(int userid,int friendid);
+
+    /**
+     * 同意加好友
+     * @param userid
+     * @param friendid
+     * @return
+     */
+    boolean agree(int userid,int friendid);
+
+    /**
+     * 拒绝加好友
+     * @param userid
+     * @param friendid
+     * @return
+     */
+    boolean refuse(int userid,int friendid);
+
+    /**
+     * 获取所有添加好友请求
+     * @param userid
+     * @return
+     */
+    List<FriendEntity> findReqFriends(int userid);
+
+    /**
+     * 按手机号或者昵称查找用户
+     * @param keyword
+     * @return
+     */
+    List<UserEntity> queryUser(String keyword);
 }
