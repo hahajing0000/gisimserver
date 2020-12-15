@@ -88,6 +88,13 @@ public interface GroupService {
     ResponseEntity<Boolean> requestAdmin(int id);
 
     /**
+     * 撤销管理
+     * @param id
+     * @return
+     */
+    ResponseEntity<Boolean> repealAdmin(int id);
+
+    /**
      * 修改成员进群状态 状态 0-邀请进群 1-申请进群 2-同意进群|已进群 3-拒绝进群
      * @param id
      * @param status

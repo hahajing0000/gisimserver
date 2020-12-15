@@ -10,60 +10,63 @@
     </resultMap>
 
     <select id="findAllTypes" resultMap="TypeResultMap">
-
+        select * from b_grouptype
     </select>
 
     <insert id="createGroup">
-
+        insert into b_group(groupname,groupdesc,owner,grouptypeid,imgpath,grouptypename,groupcode,ctime) values(#{groupname},#{groupdesc},#{owner},#{grouptypeid},#{imgpath},#{grouptypename},#{groupcode},CURRENT_TIMESTAMP)
     </insert>
 
     <update id="modifyGroup">
-
+        update b_group set groupname=#{groupname},groupdesc=#{groupdesc},owner=#{owner},grouptypeid=#{grouptypeid},imgpath=#{imgpath},grouptypename=#{grouptypename},groupcode=#{groupcode} where id=#{id}
     </update>
 
     <delete id="deleteGroup">
-
+        delete from b_group=#{id}
     </delete>
 
     <select id="findByOwnerId" resultMap="BaseResultMap">
-
+        select * from b_group where owner=#{userid}
     </select>
 
     <select id="findByUserJoinGroups" resultMap="BaseResultMap">
-
+        select distinct g.* from b_group g,b_groupmember gm where g.id=gm.groupid and gm.groupid in (select groupid from b_groupmember where memberid=#{usreid});
     </select>
 
     <select id="queryByKeyword" resultMap="BaseResultMap">
-
+        select * from b_group where groupcode like '%${keyword}%' or groupname like '%${keyword}%'
     </select>
 
     <insert id="joinGroup">
-
+        insert into b_groupmember(memberid,groupid,isowner,isadmin,nick,status,ctime) values(#{memberid},#{groupid},0,0,#{nick},#{status},CURRENT_TIMESTAMP)
     </insert>
 
     <delete id="removeMember">
-
+        delete  from b_groupmember where id=#{id}
     </delete>
 
     <update id="modifyNick">
-
+        update b_groupmember set nick=#{nick} where id=#{id}
     </update>
 
     <update id="requestAdmin">
+        update b_groupmember set isadmin=1 where id=#{id}
+    </update>
 
-
+    <update id="repealAdmin">
+        update b_groupmember set isadmin=0 where id=#{id}
     </update>
 
     <update id="modifyStatus">
-
+        update b_groupmember set status=#{status} where id=#{id}
     </update>
 
     <select id="findByGroupId" resultMap="MemberResultMap">
-
+        select gm.*,s.phonenumber,s.nick,s.headimg,imaccount,lastlocation[0] as lon,lastlocation[1] as lat from b_groupmember gm,s_user s where gm.memberid=s.id and gm.groupid=#{groupid}
     </select>
 
     <delete id="quitGroup">
-
+        delete from b_groupmember where groupid=#{groupid} and memberid=#{userid}
     </delete>
 
 </mapper>

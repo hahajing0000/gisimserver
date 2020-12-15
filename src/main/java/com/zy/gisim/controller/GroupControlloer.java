@@ -132,7 +132,7 @@ public class GroupControlloer {
     @PostMapping("/joinGroup")
     public ResponseEntity<Boolean> joinGroup(
             @RequestBody
-            @ApiParam(value = "群组成员请求实体", name = "entity", required = true)
+            @ApiParam(value = "群组成员请求实体 status 0-邀请进群 1-申请进群", name = "entity", required = true)
             ReqGroupMemberEntity entity){
         return service.joinGroup(entity);
     }
@@ -182,6 +182,22 @@ public class GroupControlloer {
     })
     public ResponseEntity<Boolean> requestAdmin(int id){
         return service.requestAdmin(id);
+    }
+
+
+    /**
+     * 撤销管理
+     * @param id
+     * @return
+     */
+    @UserToken
+    @ApiOperation(value = "撤销管理员", notes = "撤销管理员", httpMethod = "PUT")
+    @PutMapping("/repealAdmin")
+    @ApiImplicitParams(value = {
+            @ApiImplicitParam(dataType = "int", name = "id", value = "群成员id", required = true),
+    })
+    public ResponseEntity<Boolean> repealAdmin(int id){
+        return service.repealAdmin(id);
     }
 
     /**

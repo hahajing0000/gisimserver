@@ -119,6 +119,15 @@ public class GroupServiceImpl implements GroupService {
     }
 
     @Override
+    public ResponseEntity<Boolean> repealAdmin(int id) {
+        boolean result = mapper.repealAdmin(id);
+        if (result){
+            return ResponseUtils.success(true);
+        }
+        return ResponseUtils.failed("撤销管理失败");
+    }
+
+    @Override
     public ResponseEntity<Boolean> modifyStatus(int id, int status) {
         boolean result = mapper.modifyStatus(id,status);
         if (result){
