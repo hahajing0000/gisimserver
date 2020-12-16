@@ -3,7 +3,7 @@ server:
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://39.98.153.96:5432/gisim
+    url: jdbc:postgresql://39.98.153.96:5432/gisim?stringtype=unspecified
     username: zhangyue
     password: zy198662
 

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zy.gisim.mapper.MsgMapper">
+
+    <resultMap id="BaseResultMap" type="com.zy.gisim.model.MsgEntity">
+    </resultMap>
+    <resultMap id="MsgTypeResultMap" type="com.zy.gisim.model.MsgTypeEntity">
+    </resultMap>
+
+    <select id="findAllMsgTypes" resultMap="MsgTypeResultMap">
+        select * from b_msgtype
+    </select>
+
+    <insert id="sendMsg">
+        insert into b_msg(content,fromuser,touser,msgtypeid,msgtype2,isread,blltime,ctime) values (#{content},#{fromuser},#{touser},#{msgtypeid},#{msgtype2},0,#{blltime},CURRENT_TIMESTAMP)
+    </insert>
+
+    <insert id="receiveMsg">
+        insert into b_msg(content,fromuser,touser,msgtypeid,msgtype2,isread,blltime,ctime) values (#{content},#{fromuser},#{touser},#{msgtypeid},#{msgtype2},0,#{blltime},CURRENT_TIMESTAMP)
+    </insert>
+
+    <delete id="removeMsg">
+        delete from b_msg where id=#{id}
+    </delete>
+
+    <update id="readMsg">
+        update b_msg set isread=1 where id in
+        <foreach collection="ids" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
+
+    <select id="findMsgsByUser" resultMap="BaseResultMap">
+        select * from b_msg where (fromuser=#{userid} and touser=#{friendid}) or (fromuser=#{friendid} and touser=#{userid}) order by blltime limit #{pagesize} offset (#{page} * #{pagesize})
+    </select>
+</mapper>
