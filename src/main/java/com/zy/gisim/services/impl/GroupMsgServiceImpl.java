@@ -1,49 +1,42 @@
 package com.zy.gisim.services.impl;
 
+import com.zy.gisim.domain.ReqGroupMsgEntity;
 import com.zy.gisim.domain.ReqIdEntity;
-import com.zy.gisim.domain.ReqMsgEntity;
-import com.zy.gisim.mapper.MsgMapper;
-import com.zy.gisim.model.MsgEntity;
-import com.zy.gisim.model.MsgTypeEntity;
+import com.zy.gisim.mapper.GroupMsgMapper;
+import com.zy.gisim.model.GroupMsgEntity;
 import com.zy.gisim.model.ResponseEntity;
-import com.zy.gisim.services.MsgService;
+import com.zy.gisim.services.GroupMsgService;
 import com.zy.gisim.utils.ResponseUtils;
+import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
-@Service("MsgService")
-public class MsgServiceImpl implements MsgService {
-
+@Service("GroupMsgService")
+public class GroupMsgServiceImpl implements GroupMsgService {
     @Autowired
-    MsgMapper mapper;
+    GroupMsgMapper mapper;
 
     @Override
-    public ResponseEntity<List<MsgTypeEntity>> findAllMsgTypes() {
-        List<MsgTypeEntity> result = mapper.findAllMsgTypes();
-        if (result==null||result.size()==0){
-            return ResponseUtils.failed("没有检索到符合条件的数据记录");
-        }
-        return ResponseUtils.success(result);
-    }
-
-    @Override
-    public ResponseEntity<Boolean> sendMsg(ReqMsgEntity entity) {
+    public ResponseEntity<Boolean> sendMsg(ReqGroupMsgEntity entity) {
         boolean result = mapper.sendMsg(entity);
         if (result){
             return ResponseUtils.success(true);
         }
-        return ResponseUtils.failed("发送消息失败");
+        return ResponseUtils.failed("发送群组消息失败");
     }
 
     @Override
-    public ResponseEntity<Boolean> receiveMsg(ReqMsgEntity entity) {
+    public ResponseEntity<Boolean> receiveMsg(ReqGroupMsgEntity entity) {
         boolean result = mapper.receiveMsg(entity);
         if (result){
             return ResponseUtils.success(true);
         }
-        return ResponseUtils.failed("接收消息失败");
+        return ResponseUtils.failed("接收群组消息失败");
     }
 
     @Override
@@ -52,7 +45,7 @@ public class MsgServiceImpl implements MsgService {
         if (result){
             return ResponseUtils.success(true);
         }
-        return ResponseUtils.failed("删除消息失败");
+        return ResponseUtils.failed("删除群组消息失败");
     }
 
     @Override
@@ -61,12 +54,12 @@ public class MsgServiceImpl implements MsgService {
         if (result){
             return ResponseUtils.success(true);
         }
-        return ResponseUtils.failed("消息更改已读状态失败");
+        return ResponseUtils.failed("修改已读状态失败");
     }
 
     @Override
-    public ResponseEntity<List<MsgEntity>> findMsgsByUser(int userid, int friendid,int page,int pagesize) {
-        List<MsgEntity> result = mapper.findMsgsByUser(userid, friendid,page,pagesize);
+    public ResponseEntity<List<GroupMsgEntity>> findGroupMsgByUser(int userid, int groupid, int page, int pagesize) {
+        List<GroupMsgEntity> result = mapper.findGroupMsgByUser(userid, groupid, page, pagesize);
         if (result==null||result.size()==0){
             return ResponseUtils.failed("没有检索到符合条件的数据记录");
         }

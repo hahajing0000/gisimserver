@@ -25,8 +25,8 @@
 
     <update id="readMsg">
         update b_msg set isread=1 where id in
-        <foreach collection="ids" index="index" item="item" open="(" separator="," close=")">
-            #{item}
+        <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+            #{item.id}
         </foreach>
     </update>
 

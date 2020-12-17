@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zy.gisim.mapper.GroupMsgMapper">
+
+    <resultMap id="BaseResultMap" type="com.zy.gisim.model.GroupMsgEntity">
+    </resultMap>
+
+
+    <insert id="sendMsg">
+        insert into b_groupmsg(content,fromuser,touser,msgtypeid,msgtype2,isread,blltime,groupid,ctime) values (#{content},#{fromuser},#{touser},#{msgtypeid},#{msgtype2},0,#{blltime},#{groupid},CURRENT_TIMESTAMP)
+    </insert>
+
+    <insert id="receiveMsg">
+        insert into b_groupmsg(content,fromuser,touser,msgtypeid,msgtype2,isread,blltime,groupid,ctime) values (#{content},#{fromuser},#{touser},#{msgtypeid},#{msgtype2},0,#{blltime},#{groupid},CURRENT_TIMESTAMP)
+    </insert>
+
+    <delete id="removeMsg">
+        delete from b_groupmsg where id=#{id}
+    </delete>
+
+    <update id="readMsg" parameterType="java.util.List">
+        update b_groupmsg set isread=1 where id in
+        <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+            #{item.id}
+        </foreach>
+    </update>
+
+    <select id="findGroupMsgByUser" resultMap="BaseResultMap">
+        select * from b_groupmsg where groupid=#{groupid} order by blltime limit #{pagesize} offset (#{page} * #{pagesize})
+    </select>
+</mapper>

@@ -1,33 +1,26 @@
 package com.zy.gisim.services;
 
+import com.zy.gisim.domain.ReqGroupMsgEntity;
 import com.zy.gisim.domain.ReqIdEntity;
-import com.zy.gisim.domain.ReqMsgEntity;
-import com.zy.gisim.model.MsgEntity;
-import com.zy.gisim.model.MsgTypeEntity;
+import com.zy.gisim.model.GroupMsgEntity;
 import com.zy.gisim.model.ResponseEntity;
 
 import java.util.List;
 
-public interface MsgService {
-    /**
-     * 获取所有消息分类
-     * @return
-     */
-    ResponseEntity<List<MsgTypeEntity>> findAllMsgTypes();
-
+public interface GroupMsgService {
     /**
      * 发送消息
      * @param entity
      * @return
      */
-    ResponseEntity<Boolean> sendMsg(ReqMsgEntity entity);
+    ResponseEntity<Boolean> sendMsg(ReqGroupMsgEntity entity);
 
     /**
      * 接收消息
      * @param entity
      * @return
      */
-    ResponseEntity<Boolean> receiveMsg(ReqMsgEntity entity);
+    ResponseEntity<Boolean> receiveMsg(ReqGroupMsgEntity entity);
 
     /**
      * 删除指定消息
@@ -46,8 +39,8 @@ public interface MsgService {
     /**
      * 获取与指定用户的聊天记录
      * @param userid 当前用户
-     * @param friendid 指定用户
+     * @param groupid 群组id
      * @return
      */
-    ResponseEntity<List<MsgEntity>> findMsgsByUser(int userid, int friendid,int page,int pagesize);
+    ResponseEntity<List<GroupMsgEntity>> findGroupMsgByUser(int userid, int groupid, int page, int pagesize);
 }

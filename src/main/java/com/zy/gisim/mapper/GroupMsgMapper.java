@@ -1,34 +1,29 @@
 package com.zy.gisim.mapper;
 
+import com.zy.gisim.domain.ReqGroupMsgEntity;
 import com.zy.gisim.domain.ReqIdEntity;
 import com.zy.gisim.domain.ReqMsgEntity;
+import com.zy.gisim.model.GroupMsgEntity;
 import com.zy.gisim.model.MsgEntity;
-import com.zy.gisim.model.MsgTypeEntity;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public interface MsgMapper {
-    /**
-     * 获取所有消息分类
-     * @return
-     */
-    List<MsgTypeEntity> findAllMsgTypes();
-
+public interface GroupMsgMapper {
     /**
      * 发送消息
      * @param entity
      * @return
      */
-    boolean sendMsg(ReqMsgEntity entity);
+    boolean sendMsg(ReqGroupMsgEntity entity);
 
     /**
      * 接收消息
      * @param entity
      * @return
      */
-    boolean receiveMsg(ReqMsgEntity entity);
+    boolean receiveMsg(ReqGroupMsgEntity entity);
 
     /**
      * 删除指定消息
@@ -47,8 +42,8 @@ public interface MsgMapper {
     /**
      * 获取与指定用户的聊天记录
      * @param userid 当前用户
-     * @param friendid 指定用户
+     * @param groupid 群组id
      * @return
      */
-    List<MsgEntity> findMsgsByUser(int userid,int friendid,int page,int pagesize);
+    List<GroupMsgEntity> findGroupMsgByUser(int userid, int groupid, int page, int pagesize);
 }
