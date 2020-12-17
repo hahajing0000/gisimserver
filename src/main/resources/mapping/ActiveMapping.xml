@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zy.gisim.mapper.ActiveMapper">
+
+    <resultMap id="BaseResultMap" type="com.zy.gisim.model.ActiveEntity">
+    </resultMap>
+    <resultMap id="ActiveTypeResultMap" type="com.zy.gisim.model.ActiveTypeEntity">
+    </resultMap>
+    <resultMap id="MemberResultMap" type="com.zy.gisim.model.ActiveMemberEntity">
+    </resultMap>
+
+    <select id="findAllActiveType" resultMap="ActiveTypeResultMap">
+
+    </select>
+
+    <insert id="createActive">
+
+    </insert>
+
+    <update id="modifyActive">
+
+    </update>
+
+    <delete id="removeActive">
+
+    </delete>
+
+    <select id="findActiveByUser" resultMap="BaseResultMap">
+
+    </select>
+
+    <insert id="addMember">
+
+    </insert>
+
+    <delete id="removeMember">
+
+    </delete>
+
+    <update id="modifyNick">
+
+    </update>
+
+    <update id="agree">
+
+    </update>
+
+    <update id="refuse">
+
+    </update>
+
+    <delete id="quitActive">
+
+    </delete>
+
+    <select id="isOwner" resultType="int">
+
+    </select>
+</mapper>
