@@ -52,6 +52,13 @@ public interface ActiveMapper {
     boolean addMember(ReqActiveMemberEntity entity);
 
     /**
+     * 申请加入活动
+     * @param entity
+     * @return
+     */
+    boolean reqJoinActive(ReqActiveMemberEntity entity);
+
+    /**
      * 删除成员
      * @param activeid
      * @param memberid
@@ -77,12 +84,28 @@ public interface ActiveMapper {
     boolean agree(int activeid,int memberid);
 
     /**
+     * 同意申请加入活动
+     * @param activeid
+     * @param memberid
+     * @return
+     */
+    boolean agreeReq(int activeid,int memberid);
+
+    /**
      * 拒绝加入活动
      * @param activeid
      * @param memberid
      * @return
      */
     boolean refuse(int activeid,int memberid);
+
+    /**
+     * 拒绝申请
+     * @param activeid
+     * @param memberid
+     * @return
+     */
+    boolean refuseReq(int activeid,int memberid);
 
     /**
      * 退出活动
@@ -98,5 +121,5 @@ public interface ActiveMapper {
      * @param memberid
      * @return
      */
-    boolean isOwner(int activeid,int memberid);
+    int isOwner(int activeid,int memberid);
 }

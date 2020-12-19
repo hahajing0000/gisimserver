@@ -211,4 +211,53 @@ public class ActiveController {
     public ResponseEntity<Boolean> isOwner(int activeid,int memberid){
         return service.isOwner(activeid,memberid);
     }
+
+    /**
+     * 申请加入活动
+     * @param entity
+     * @return
+     */
+    @UserToken
+    @ApiOperation(value = "申请加入活动", notes = "申请加入活动", httpMethod = "POST")
+    @PostMapping("/reqJoinActive")
+    public ResponseEntity<Boolean> reqJoinActive(
+            @RequestBody
+            @ApiParam(value = "成员请求实体", name = "entity", required = true)
+            ReqActiveMemberEntity entity){
+        return service.reqJoinActive(entity);
+    }
+
+    /**
+     * 同意申请加入活动
+     * @param activeid
+     * @param memberid
+     * @return
+     */
+    @UserToken
+    @ApiOperation(value = "同意申请加入活动", notes = "同意申请加入活动", httpMethod = "PUT")
+    @PutMapping("/agreeReq")
+    @ApiImplicitParams(value = {
+            @ApiImplicitParam(dataType = "int", name = "activeid", value = "活动id", required = true),
+            @ApiImplicitParam(dataType = "int", name = "memberid", value = "成员id", required = true),
+    })
+    public ResponseEntity<Boolean> agreeReq(int activeid,int memberid){
+        return service.agreeReq(activeid,memberid);
+    }
+
+    /**
+     * 拒绝申请
+     * @param activeid
+     * @param memberid
+     * @return
+     */
+    @UserToken
+    @ApiOperation(value = "拒绝申请加入活动", notes = "拒绝申请加入活动", httpMethod = "PUT")
+    @PutMapping("/refuseReq")
+    @ApiImplicitParams(value = {
+            @ApiImplicitParam(dataType = "int", name = "activeid", value = "活动id", required = true),
+            @ApiImplicitParam(dataType = "int", name = "memberid", value = "成员id", required = true),
+    })
+    public ResponseEntity<Boolean> refuseReq(int activeid,int memberid){
+        return service.refuseReq(activeid,memberid);
+    }
 }

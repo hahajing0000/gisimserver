@@ -10,50 +10,62 @@
     </resultMap>
 
     <select id="findAllActiveType" resultMap="ActiveTypeResultMap">
-
+        select * from b_activetype
     </select>
 
     <insert id="createActive">
-
+        insert into b_active(activetypeid,activename,addresslocation,locationname,starttime,activedesc,owner,ctime) values (#{activetypeid},#{activename},point(#{lon},#{lat}),#{locationname},#{starttime},#{activedesc},#{owner},CURRENT_TIMESTAMP)
     </insert>
 
     <update id="modifyActive">
-
+        update b_active set activetypeid=#{activetypeid},#{activename},addresslocation=point(#{lon},#{lat}),locationname=#{locationname},starttime=#{starttime},activedesc=#{activedesc} where id=#{id}
     </update>
 
     <delete id="removeActive">
-
+        delete from b_active where id=#{id}
     </delete>
 
     <select id="findActiveByUser" resultMap="BaseResultMap">
-
+        select a.* from b_active a,b_activemember am where a.id=am.activeid and am.memberid=#{userid}
     </select>
 
     <insert id="addMember">
+        insert into b_activemember(memberid,activeid,isowner,nick,status,ctime) values (#{memberid},#{activeid},1,#{nick},0,CURRENT_TIMESTAMP)
+    </insert>
 
+    <insert id="reqJoinActive">
+        insert into b_activemember(memberid,activeid,isowner,nick,status,ctime) values (#{memberid},#{activeid},1,#{nick},1,CURRENT_TIMESTAMP)
     </insert>
 
     <delete id="removeMember">
-
+        delete from b_activemember where activeid=#{activeid} and memberid=#{memberid}
     </delete>
 
     <update id="modifyNick">
-
+        update b_activemember set nick=#{nick}  where activeid=#{activeid} and memberid=#{memberid}
     </update>
 
     <update id="agree">
+        update b_activemember set status=2  where activeid=#{activeid} and memberid=#{memberid}
+    </update>
 
+    <update id="agreeReq">
+        update b_activemember set status=21  where activeid=#{activeid} and memberid=#{memberid}
     </update>
 
     <update id="refuse">
+        update b_activemember set status=3  where activeid=#{activeid} and memberid=#{memberid}
+    </update>
 
+    <update id="refuseReq">
+        update b_activemember set status=31  where activeid=#{activeid} and memberid=#{memberid}
     </update>
 
     <delete id="quitActive">
-
+        delete from b_activemember where activeid=#{activeid} and memberid=#{memberid}
     </delete>
 
     <select id="isOwner" resultType="int">
-
+        select count(*) from b_activemember where activeid=#{activeid} and memberid=#{memberid} and isowner=1
     </select>
 </mapper>

@@ -21,6 +21,6 @@ public class ActiveMemberEntity {
     private int isowner;
     @ApiModelProperty(name = "nick", value = "昵称", notes = "昵称", dataType = "String")
     private String nick;
-    @ApiModelProperty(name = "status", value = "状态 0-邀请进群 1-申请进群 2-同意进群|已进群 3-拒绝进群", notes = "状态 0-邀请进群 1-申请进群 2-同意进群|已进群 3-拒绝进群", dataType = "int")
+    @ApiModelProperty(name = "status", value = "状态 0-邀请进群 1-申请进群 2-同意进群|已进群 21 同意申请加入活动 3-拒绝进群 31-拒绝申请加入活动", notes = "状态 0-邀请进群 1-申请进群 2-同意进群|已进群 21 同意申请加入活动 3-拒绝进群 31-拒绝申请加入活动", dataType = "int")
     private int status;
 }

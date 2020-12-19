@@ -98,4 +98,27 @@ public interface ActiveService {
      * @return
      */
     ResponseEntity<Boolean> isOwner(int activeid,int memberid);
+
+    /**
+     * 申请加入活动
+     * @param entity
+     * @return
+     */
+    ResponseEntity<Boolean> reqJoinActive(ReqActiveMemberEntity entity);
+
+    /**
+     * 同意申请加入活动
+     * @param activeid
+     * @param memberid
+     * @return
+     */
+    ResponseEntity<Boolean> agreeReq(int activeid,int memberid);
+
+    /**
+     * 拒绝申请
+     * @param activeid
+     * @param memberid
+     * @return
+     */
+    ResponseEntity<Boolean> refuseReq(int activeid,int memberid);
 }

@@ -119,10 +119,37 @@ public class ActiveServiceImpl implements ActiveService {
 
     @Override
     public ResponseEntity<Boolean> isOwner(int activeid, int memberid) {
-        boolean result = mapper.isOwner(activeid,memberid);
-        if (result){
+        int result = mapper.isOwner(activeid,memberid);
+        if (result>0){
             return ResponseUtils.success(true);
         }
         return ResponseUtils.failed("操作失败");
+    }
+
+    @Override
+    public ResponseEntity<Boolean> reqJoinActive(ReqActiveMemberEntity entity) {
+        boolean result = mapper.reqJoinActive(entity);
+        if (result){
+            return ResponseUtils.success(true);
+        }
+        return ResponseUtils.failed("申请加入活动失败");
+    }
+
+    @Override
+    public ResponseEntity<Boolean> agreeReq(int activeid, int memberid) {
+        boolean result = mapper.agreeReq(activeid,memberid);
+        if (result){
+            return ResponseUtils.success(true);
+        }
+        return ResponseUtils.failed("同意申请加入活动失败");
+    }
+
+    @Override
+    public ResponseEntity<Boolean> refuseReq(int activeid, int memberid) {
+        boolean result = mapper.refuseReq(activeid,memberid);
+        if (result){
+            return ResponseUtils.success(true);
+        }
+        return ResponseUtils.failed("拒绝申请加入活动失败");
     }
 }

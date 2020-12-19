@@ -11,6 +11,8 @@ import lombok.ToString;
 @ToString
 @ApiModel(value = "活动请求实体", description = "活动请求实体")
 public class ReqActiveEntity {
+    @ApiModelProperty(name = "id", value = "id", notes = "id", dataType = "int")
+    private int id;
     @ApiModelProperty(name = "activetypeid", value = "活动类型id", notes = "活动类型id", dataType = "int")
     private int activetypeid;
     @ApiModelProperty(name = "activename", value = "活动名称", notes = "活动名称", dataType = "String")
