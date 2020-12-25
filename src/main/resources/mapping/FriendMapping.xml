@@ -43,7 +43,7 @@
     </update>
 
     <select id="findReqFriends" resultMap="BaseResultMap">
-        select f.*,s.phonenumber,s.nick,s.headimg,imaccount,lastlocation[0] as lon,lastlocation[1] as lat from b_friend f,s_user s where f.userid=s.id and f.userid=#{userid} and f.status=0
+        select f.*,s.phonenumber,s.nick,s.headimg,imaccount,lastlocation[0] as lon,lastlocation[1] as lat from b_friend f,s_user s where f.userid=s.id and f.friendid=#{userid} and f.status=0
     </select>
 
     <select id="queryUser" resultMap="UserResultMap">

@@ -26,7 +26,8 @@
     </delete>
 
     <select id="findActiveByUser" resultMap="BaseResultMap">
-        select a.* from b_active a,b_activemember am where a.id=am.activeid and am.memberid=#{userid}
+
+        select a.* from b_active a,b_activemember am where a.id=am.activeid and am.memberid=#{userid}  union all select * from b_active where owner=#{userid}
     </select>
 
     <insert id="addMember">
